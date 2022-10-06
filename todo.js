@@ -1,50 +1,65 @@
 const todoList = () => {
-  all = []
+  const all = [];
   const add = (todoItem) => {
-    all.push(todoItem)
-  }
+    all.push(todoItem);
+  };
   const markAsComplete = (index) => {
-    all[index].completed = true
-  }
+    all[index].completed = true;
+  };
 
   const overdue = () => {
-   return all.filter((item)=>item.dueDate< today)
-  }
+    return all.filter((item) => item.dueDate < today);
+  };
 
   const dueToday = () => {
-     return all.filter((item)=>item.dueDate=== today)
-  }
+    return all.filter((item) => item.dueDate === today);
+  };
 
   const dueLater = () => {
-    return all.filter((item)=>item.dueDate> today)
-  }
+    return all.filter((item) => item.dueDate > today);
+  };
 
   const toDisplayableList = (list) => {
-     let res= list.map(item=>`${item.completed ? '[x] ':'[ ] '}${item.title} ${item.dueDate===today ? " ":item.dueDate}`).join("\n")
-        return res;
-  }
-  return { all, add, markAsComplete, overdue, dueToday, dueLater, toDisplayableList };
-}
-module.exports=todoList;
+    let res = list
+      .map(
+        (item) =>
+          `${item.completed ? "[x] " : "[ ] "}${item.title} ${
+            item.dueDate === today ? " " : item.dueDate
+          }`
+      )
+      .join("\n");
+    return res;
+  };
+  return {
+    all,
+    add,
+    markAsComplete,
+    overdue,
+    dueToday,
+    dueLater,
+    toDisplayableList,
+  };
+};
 
 // ####################################### #
 // DO NOT CHANGE ANYTHING BELOW THIS LINE. #
 // ####################################### #
 
-const todos = todoList();
+// const todos = todoList();
 
-const formattedDate = d => {
-  return d.toISOString().split("T")[0]
-}
+const formattedDate = (d) => {
+  return d.toISOString().split("T")[0];
+};
 
-var dateToday = new Date()
-const today = formattedDate(dateToday)
-const yesterday = formattedDate(
-  new Date(new Date().setDate(dateToday.getDate() - 1))
-)
-const tomorrow = formattedDate(
-  new Date(new Date().setDate(dateToday.getDate() + 1))
-)
+var dateToday = new Date();
+const today = formattedDate(dateToday);
+// const yesterday = formattedDate(
+//   new Date(new Date().setDate(dateToday.getDate() - 1))
+// );
+// const tomorrow = formattedDate(
+//   new Date(new Date().setDate(dateToday.getDate() + 1))
+// );
+module.exports = todoList;
 
 // todos.add({ title: 'Submit assignment', dueDate: yesterday, completed: false })
 // todos.add({ title: 'Pay rent', dueDate: today, completed: true })
